@@ -40,7 +40,7 @@ public class DepartmentListController implements Initializable {
 		System.out.println("Click");
 	}
 	
-	public void setDeparmentService(DepartmentService service) {
+	public void setDepartmentService(DepartmentService service) {
 		this.service = service;
 	}
 
