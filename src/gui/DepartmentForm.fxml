@@ -36,11 +36,6 @@
                   <Insets top="1.0" />
                </padding>
             </TextField>
-            <Label fx:id="labelErrorName" textFill="#f80000" GridPane.columnIndex="2" GridPane.rowIndex="1">
-               <GridPane.margin>
-                  <Insets left="5.0" />
-               </GridPane.margin>
-            </Label>
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
                   <Button fx:id="btSave" mnemonicParsing="false" onAction="#onBtSaveAction" prefHeight="25.0" prefWidth="53.0" text="Save" />
@@ -52,5 +47,6 @@
             </HBox>
          </children>
       </GridPane>
+      <Label fx:id="labelErrorName" layoutX="25.0" layoutY="113.0" textFill="#f80000" />
    </children>
 </AnchorPane>
