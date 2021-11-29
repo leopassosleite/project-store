@@ -61,7 +61,7 @@ public class ProductDaoJDBC implements ProductDao {
 	}
 
 	@Override
-	public void upadate(Product obj) {
+	public void update(Product obj) {
 		PreparedStatement st = null;
 		try {
 			st = conn.prepareStatement(
@@ -151,7 +151,7 @@ public class ProductDaoJDBC implements ProductDao {
 	}
 
 	@Override
-	public List<Product> findALL() {
+	public List<Product> findAll() {
 		PreparedStatement st = null;
 		ResultSet rs = null;
 		try {
