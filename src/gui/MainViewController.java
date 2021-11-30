@@ -15,8 +15,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import model.services.ClientService;
 import model.services.DepartmentService;
 import model.services.ProductService;
 
@@ -24,13 +24,13 @@ public class MainViewController implements Initializable {
 
 	@FXML
 	private MenuItem menuItemClient;
-	
+
 	@FXML
 	private MenuItem menuItemSeller;
-	
+
 	@FXML
 	private MenuItem menuItemRequest;
-	
+
 	@FXML
 	private MenuItem menuItemProduct;
 
@@ -39,16 +39,19 @@ public class MainViewController implements Initializable {
 
 	@FXML
 	private MenuItem menuItemAbout;
-	
+
 	public void onMenuItemRegisterClientAction() {
-		System.out.println("Cliente");	
+		loadView("/gui/ClienttList.fxml", (ClientListController controller) -> {
+			controller.setClientService(new ClientService());
+			controller.updateTableView();
+		});
 	}
-	
+
 	public void onMenuItemRegisterSellerAction() {
 		System.out.println("Vendedor");
-		
+
 	}
-	
+
 	public void onMenuItemRequestAction() {
 		System.out.println("Pedidos");
 	}
@@ -72,7 +75,8 @@ public class MainViewController implements Initializable {
 
 	@FXML
 	public void onMenuItemAboutAction() {
-		loadView("/gui/About.fxml", x -> {});
+		loadView("/gui/About.fxml", x -> {
+		});
 	}
 
 	@Override
@@ -86,15 +90,15 @@ public class MainViewController implements Initializable {
 
 			Scene mainScene = Main.getMainScene();
 			VBox mainVBox = (VBox) ((ScrollPane) mainScene.getRoot()).getContent();
-			
+
 			Node mainMenu = mainVBox.getChildren().get(0);
 			mainVBox.getChildren().clear();
 			mainVBox.getChildren().add(mainMenu);
 			mainVBox.getChildren().addAll(newVBox.getChildren());
-			
+
 			T controller = loader.getController();
 			initializingaAction.accept(controller);
-			
+
 		} catch (IOException e) {
 			Alerts.showAlert("IO Exception", "Error loading view", e.getMessage(), AlertType.ERROR);
 		}
