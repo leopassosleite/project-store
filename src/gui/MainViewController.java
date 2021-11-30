@@ -22,6 +22,15 @@ import model.services.ProductService;
 public class MainViewController implements Initializable {
 
 	@FXML
+	private MenuItem menuItemClient;
+	
+	@FXML
+	private MenuItem menuItemSeller;
+	
+	@FXML
+	private MenuItem menuItemRequest;
+	
+	@FXML
 	private MenuItem menuItemProduct;
 
 	@FXML
@@ -29,6 +38,20 @@ public class MainViewController implements Initializable {
 
 	@FXML
 	private MenuItem menuItemAbout;
+	
+	public void onMenuItemRegisterClientAction() {
+		System.out.println("Cliente");
+		
+	}
+	
+	public void onMenuItemRegisterSellerAction() {
+		System.out.println("Vendedor");
+		
+	}
+	
+	public void onMenuItemRequestAction() {
+		System.out.println("Pedidos");
+	}
 
 	@FXML
 	public void onMenuItemProductAction() {

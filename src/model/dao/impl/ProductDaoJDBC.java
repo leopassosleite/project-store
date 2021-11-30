@@ -57,7 +57,6 @@ public class ProductDaoJDBC implements ProductDao {
 		} finally {
 			DB.closeStatement(st);
 		}
-
 	}
 
 	@Override
@@ -138,7 +137,7 @@ public class ProductDaoJDBC implements ProductDao {
 		obj.setName(rs.getString("Name"));
 		obj.setPrice(rs.getDouble("Price"));
 		obj.setQuantity(rs.getInt("Quantity"));
-		obj.setSaleDate(rs.getDate("SaleDate"));
+		obj.setSaleDate(new java.util.Date(rs.getTimestamp("SaleDate").getTime()));
 		obj.setDepartment(dep);
 		return obj;
 	}

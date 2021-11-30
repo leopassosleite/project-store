@@ -87,9 +87,9 @@ public class ProductListController implements Initializable, DataChangeListener 
 		tableColumnName.setCellValueFactory(new PropertyValueFactory<>("name"));
 		tableColumnSaleDate.setCellValueFactory(new PropertyValueFactory<>("saleDate"));
 		Utils.formatTableColumnDate(tableColumnSaleDate, "dd/MM/yyyy");
-		tableColumnPrice.setCellValueFactory(new PropertyValueFactory<>("Price"));
+		tableColumnPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
 		Utils.formatTableColumnDouble(tableColumnPrice, 2);
-		tableColumnQuantity.setCellValueFactory(new PropertyValueFactory<>("Quantity"));
+		tableColumnQuantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
 
 		Stage stage = (Stage) Main.getMainScene().getWindow();
 		tableViewProduct.prefHeightProperty().bind(stage.heightProperty());

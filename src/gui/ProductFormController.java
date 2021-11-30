@@ -1,8 +1,11 @@
 package gui;
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Set;
@@ -17,6 +20,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import model.entities.Product;
@@ -28,7 +32,7 @@ public class ProductFormController implements Initializable {
 	private Product entity;
 
 	private ProductService service;
-	
+
 	private List<DataChangeListener> dataChangeListener = new ArrayList<>();
 
 	@FXML
@@ -38,7 +42,25 @@ public class ProductFormController implements Initializable {
 	private TextField txtName;
 
 	@FXML
+	private DatePicker dpSaleDate;
+
+	@FXML
+	private TextField txtPrice;
+
+	@FXML
+	private TextField txtQuantity;
+
+	@FXML
 	private Label labelErrorName;
+
+	@FXML
+	private Label labelErrorSaleDate;
+
+	@FXML
+	private Label labelErrorPrice;
+
+	@FXML
+	private Label labelErrorQuantity;
 
 	@FXML
 	private Button btSave;
@@ -53,7 +75,7 @@ public class ProductFormController implements Initializable {
 	public void setProductService(ProductService service) {
 		this.service = service;
 	}
-	
+
 	public void subscribeDataChangeListener(DataChangeListener listener) {
 		dataChangeListener.add(listener);
 	}
@@ -67,38 +89,36 @@ public class ProductFormController implements Initializable {
 			throw new IllegalStateException("Service was null");
 		}
 		try {
-		entity = getFormData();	
-		service.saveOrUpdate(entity);
-		notifyDataChangeListeners();
-		Utils.currentStage(event).close();
-		}
-		catch (ValidationException e) {
+			entity = getFormData();
+			service.saveOrUpdate(entity);
+			notifyDataChangeListeners();
+			Utils.currentStage(event).close();
+		} catch (ValidationException e) {
 			setErrorMessages(e.getErrors());
-		}
-		catch (DbException e) {
+		} catch (DbException e) {
 			Alerts.showAlert("Error saving object", null, e.getMessage(), AlertType.ERROR);
 		}
 	}
 
 	private void notifyDataChangeListeners() {
-		for(DataChangeListener listener : dataChangeListener) {
+		for (DataChangeListener listener : dataChangeListener) {
 			listener.onDataChanged();
 		}
-		
+
 	}
 
 	private Product getFormData() {
 		Product obj = new Product();
-		
+
 		ValidationException exception = new ValidationException("Validation error");
 
 		obj.setId(Utils.tryparseToInt(txtId.getText()));
-		
-		if(txtName.getText() == null || txtName.getText().trim().equals(" ")) {
+
+		if (txtName.getText() == null || txtName.getText().trim().equals(" ")) {
 			exception.addError("name", "Informe um produto");
 		}
 		obj.setName(txtName.getText());
-		
+
 		if (exception.getErrors().size() > 0) {
 			throw exception;
 		}
@@ -119,6 +139,9 @@ public class ProductFormController implements Initializable {
 	private void initializeNodes() {
 		Constraints.setTextFieldInteger(txtId);
 		Constraints.setTextFieldMaxLength(txtName, 30);
+		Constraints.setTextFieldDouble(txtPrice);
+		Constraints.setTextFieldInteger(txtQuantity);
+		Utils.formatDatePicker(dpSaleDate, "dd/MM/yyyy");
 	}
 
 	public void updateFormData() {
@@ -127,12 +150,19 @@ public class ProductFormController implements Initializable {
 		}
 		txtId.setText(String.valueOf(entity.getId()));
 		txtName.setText(entity.getName());
+		txtQuantity.setText(String.valueOf(entity.getId()));
+		Locale.setDefault(Locale.US);
+		txtPrice.setText(String.format("%.2f", entity.getPrice()));
+		if (entity.getSaleDate() != null) {
+			dpSaleDate.setValue(LocalDate.ofInstant(entity.getSaleDate().toInstant(), ZoneId.systemDefault()));
+		}
 	}
-	
+
 	private void setErrorMessages(Map<String, String> errors) {
 		Set<String> fields = errors.keySet();
-		
-		if(fields.contains("name"));
+
+		if (fields.contains("name"))
+			;
 		labelErrorName.setText(errors.get("name"));
 	}
 }

@@ -22,7 +22,7 @@ public class Main extends Application {
 			
 			mainScene = new Scene(scrollPane);
 			primaryStage.setScene(mainScene);
-			primaryStage.setTitle("Controle de estoque Brick São Francisco");
+			primaryStage.setTitle("Banco de dados XBarts");
 			primaryStage.show();
 		} catch (IOException e) {
 			e.printStackTrace();
