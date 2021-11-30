@@ -1,9 +1,11 @@
 package gui;
 
 import java.net.URL;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -130,10 +132,29 @@ public class ProductFormController implements Initializable {
 
 		obj.setId(Utils.tryparseToInt(txtId.getText()));
 
-		if (txtName.getText() == null || txtName.getText().trim().equals(" ")) {
-			exception.addError("name", "Informe um produto");
+		if (txtName.getText() == null || txtName.getText().trim().equals("")) {
+			exception.addError("name", "Campo Vazio");
 		}
 		obj.setName(txtName.getText());
+
+		if (dpSaleDate.getValue() == null) {
+			exception.addError("saleDate", "Campo vazio");
+		} else {
+			Instant instant = Instant.from(dpSaleDate.getValue().atStartOfDay(ZoneId.systemDefault()));
+			obj.setSaleDate(Date.from(instant));
+		}
+
+		if (txtPrice.getText() == null || txtPrice.getText().trim().equals("")) {
+			exception.addError("price", "Campo Vazio");
+		}
+		obj.setPrice(Utils.tryparseToDouble(txtPrice.getText()));
+
+		if (txtQuantity.getText() == null || txtQuantity.getText().trim().equals("")) {
+			exception.addError("quantity", "Campo Vazio");
+		}
+		obj.setQuantity(Utils.tryparseToInt(txtQuantity.getText()));
+
+		obj.setDepartment(comboBoxDepartment.getValue());
 
 		if (exception.getErrors().size() > 0) {
 			throw exception;
@@ -158,7 +179,7 @@ public class ProductFormController implements Initializable {
 		Constraints.setTextFieldDouble(txtPrice);
 		Constraints.setTextFieldInteger(txtQuantity);
 		Utils.formatDatePicker(dpSaleDate, "dd/MM/yyyy");
-		
+
 		initializeComboBoxDepartment();
 	}
 
@@ -168,17 +189,16 @@ public class ProductFormController implements Initializable {
 		}
 		txtId.setText(String.valueOf(entity.getId()));
 		txtName.setText(entity.getName());
-		txtQuantity.setText(String.valueOf(entity.getId()));
 		Locale.setDefault(Locale.US);
 		txtPrice.setText(String.format("%.2f", entity.getPrice()));
+		txtQuantity.setText(String.valueOf(entity.getQuantity()));
 		if (entity.getSaleDate() != null) {
 			dpSaleDate.setValue(LocalDate.ofInstant(entity.getSaleDate().toInstant(), ZoneId.systemDefault()));
 		}
 		if (entity.getDepartment() == null) {
 			comboBoxDepartment.getSelectionModel().selectFirst();
-		}
-		else {
-		comboBoxDepartment.setValue(entity.getDepartment());
+		} else {
+			comboBoxDepartment.setValue(entity.getDepartment());
 		}
 	}
 
@@ -194,9 +214,10 @@ public class ProductFormController implements Initializable {
 	private void setErrorMessages(Map<String, String> errors) {
 		Set<String> fields = errors.keySet();
 
-		if (fields.contains("name"))
-			;
-		labelErrorName.setText(errors.get("name"));
+		labelErrorName.setText((fields.contains("name") ? errors.get("name") : ""));
+		labelErrorSaleDate.setText((fields.contains("saleDate") ? errors.get("saleDate") : ""));
+		labelErrorPrice.setText((fields.contains("price") ? errors.get("price") : ""));
+		labelErrorQuantity.setText((fields.contains("quantity") ? errors.get("quantity") : ""));
 	}
 
 	private void initializeComboBoxDepartment() {
@@ -207,8 +228,7 @@ public class ProductFormController implements Initializable {
 				setText(empty ? "" : item.getName());
 			}
 		};
-		comboBoxDepartment.setCellFactory(factory); 
-		comboBoxDepartment.setButtonCell(factory.call(null)); 
-
+		comboBoxDepartment.setCellFactory(factory);
+		comboBoxDepartment.setButtonCell(factory.call(null));
 	}
 }

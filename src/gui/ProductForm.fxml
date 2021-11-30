@@ -61,13 +61,13 @@
                   <Insets top="1.0" />
                </padding>
             </TextField>
+            <Label fx:id="labelErrorName" textFill="#f80000" GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <Label fx:id="labelErrorSaleDate" textFill="RED" GridPane.columnIndex="2" GridPane.rowIndex="2" />
             <Label fx:id="labelErrorPrice" textFill="RED" GridPane.columnIndex="2" GridPane.rowIndex="3" />
             <Label fx:id="labelErrorQuantity" textFill="RED" GridPane.columnIndex="2" GridPane.rowIndex="4" />
             <ComboBox fx:id="comboBoxDepartment" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
          </children>
       </GridPane>
-      <Label fx:id="labelErrorName" layoutX="24.0" layoutY="146.0" textFill="#f80000" />
       <HBox layoutX="24.0" layoutY="188.0" prefHeight="28.0" prefWidth="123.0" spacing="5.0">
          <children>
             <Button fx:id="btSave" mnemonicParsing="false" onAction="#onBtSaveAction" prefHeight="25.0" prefWidth="53.0" text="Save" />
