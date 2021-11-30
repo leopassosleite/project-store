@@ -31,6 +31,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.entities.Product;
+import model.services.DepartmentService;
 import model.services.ProductService;
 
 public class ProductListController implements Initializable, DataChangeListener {
@@ -113,7 +114,8 @@ public class ProductListController implements Initializable, DataChangeListener 
 
 			ProductFormController controller = loader.getController();
 			controller.setProduct(obj);
-			controller.setProductService(new ProductService());
+			controller.setServices(new ProductService(), new DepartmentService());
+			controller.loadAssociatedObjects();
 			controller.subscribeDataChangeListener(this);
 			controller.updateFormData();
 
@@ -125,6 +127,7 @@ public class ProductListController implements Initializable, DataChangeListener 
 			dialogStage.initModality(Modality.WINDOW_MODAL);
 			dialogStage.showAndWait();
 		} catch (IOException e) {
+			e.printStackTrace();
 			Alerts.showAlert("IO Exception", "Error loading view", e.getMessage(), AlertType.ERROR);
 		}
 	}
