@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="387.0" prefWidth="872.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ClientListController">
+   <children>
+      <Label text="Registro do cliente">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+         <VBox.margin>
+            <Insets left="5.0" top="5.0" />
+         </VBox.margin>
+      </Label>
+      <ToolBar prefHeight="40.0" prefWidth="200.0">
+        <items>
+          <Button fx:id="btNew" mnemonicParsing="false" onAction="#OnBtNewAction" text="Novo" />
+        </items>
+      </ToolBar>
+      <TableView fx:id="tableViewClient" prefHeight="200.0" prefWidth="200.0">
+        <columns>
+          <TableColumn fx:id="tableColumnId" prefWidth="75.0" text="ID" />
+          <TableColumn fx:id="tableColumnName" prefWidth="121.0" text="Nome" />
+            <TableColumn fx:id="tableColumnEDIT" prefWidth="75.0" text="E-mail" />
+            <TableColumn fx:id="tableColumnREMOVE" prefWidth="75.0" text="Telefone" />
+            <TableColumn fx:id="tableColumnREMOVE1" prefWidth="75.0" text="Endereço" />
+            <TableColumn fx:id="tableColumnREMOVE11" prefWidth="75.0" text="Cep" />
+            <TableColumn fx:id="tableColumnREMOVE111" prefWidth="75.0" text="Bairro" />
+            <TableColumn fx:id="tableColumnREMOVE11112" prefWidth="75.0" text="Cidade" />
+            <TableColumn fx:id="tableColumnREMOVE111121" prefWidth="75.0" text="UF" />
+            <TableColumn fx:id="tableColumnREMOVE1111" prefWidth="75.0" text="RG" />
+            <TableColumn fx:id="tableColumnREMOVE11111" prefWidth="75.0" text="CPF" />
+        </columns>
+      </TableView>
+   </children>
+</VBox>

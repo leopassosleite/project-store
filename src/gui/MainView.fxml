@@ -14,7 +14,7 @@
               <menus>
                   <Menu mnemonicParsing="false" text="Registros">
                      <items>
-                        <MenuItem fx:id="menuItemRegisterSeller" mnemonicParsing="false" onAction="#onMenuItemRegisterClientAction" text="Clientes" />
+                        <MenuItem fx:id="menuItemClient" mnemonicParsing="false" onAction="#onMenuItemRegisterClientAction" text="Clientes" />
                         <MenuItem fx:id="menuItemSeller" mnemonicParsing="false" onAction="#onMenuItemRegisterSellerAction" text="Vendedores" />
                      </items>
                   </Menu>

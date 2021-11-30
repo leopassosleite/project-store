@@ -15,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import model.services.DepartmentService;
 import model.services.ProductService;
@@ -40,8 +41,7 @@ public class MainViewController implements Initializable {
 	private MenuItem menuItemAbout;
 	
 	public void onMenuItemRegisterClientAction() {
-		System.out.println("Cliente");
-		
+		System.out.println("Cliente");	
 	}
 	
 	public void onMenuItemRegisterSellerAction() {
@@ -86,7 +86,7 @@ public class MainViewController implements Initializable {
 
 			Scene mainScene = Main.getMainScene();
 			VBox mainVBox = (VBox) ((ScrollPane) mainScene.getRoot()).getContent();
-
+			
 			Node mainMenu = mainVBox.getChildren().get(0);
 			mainVBox.getChildren().clear();
 			mainVBox.getChildren().add(mainMenu);
