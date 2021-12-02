@@ -30,7 +30,7 @@ public class ProductDaoJDBC implements ProductDao {
 		try {
 			st = conn.prepareStatement(
 					"INSERT INTO product " 
-					+ "(Name, SaleDate, Quantity, Price, DepartmentId) "
+					+ "(Name, SaleDate, Price, Quantity, DepartmentId) "
 					+ "VALUES " 
 					+ "(?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
 

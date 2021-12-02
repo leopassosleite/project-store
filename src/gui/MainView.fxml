@@ -12,17 +12,6 @@
          <children>
             <MenuBar>
               <menus>
-                  <Menu mnemonicParsing="false" text="Registros">
-                     <items>
-                        <MenuItem fx:id="menuItemClient" mnemonicParsing="false" onAction="#onMenuItemRegisterClientAction" text="Clientes" />
-                        <MenuItem fx:id="menuItemSeller" mnemonicParsing="false" onAction="#onMenuItemRegisterSellerAction" text="Vendedores" />
-                     </items>
-                  </Menu>
-                  <Menu mnemonicParsing="false" text="Vendas">
-                     <items>
-                        <MenuItem fx:id="menuItemRequest" mnemonicParsing="false" onAction="#onMenuItemRequestAction" text="Pedidos" />
-                     </items>
-                  </Menu>
                 <Menu mnemonicParsing="false" text="Estoque">
                   <items>
                     <MenuItem fx:id="menuItemProduct" mnemonicParsing="false" onAction="#onMenuItemProductAction" text="Produtos" />
