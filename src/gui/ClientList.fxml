@@ -28,14 +28,14 @@
         <columns>
           <TableColumn fx:id="tableColumnId" prefWidth="75.0" text="ID" />
           <TableColumn fx:id="tableColumnName" prefWidth="121.0" text="Nome" />
-            <TableColumn fx:id="tableColumnEDIT" prefWidth="75.0" text="Email" />
-            <TableColumn fx:id="tableColumnREMOVE" prefWidth="121.0" text="Data de nascimento" />
-            <TableColumn fx:id="tableColumnId1" prefWidth="75.0" text="Endereço" />
-            <TableColumn fx:id="tableColumnId11" prefWidth="75.0" text="Cidade" />
-            <TableColumn fx:id="tableColumnId111" prefWidth="75.0" text="CEP" />
-            <TableColumn fx:id="tableColumnId1111" prefWidth="75.0" text="RG" />
-            <TableColumn fx:id="tableColumnId11111" prefWidth="75.0" text="CPF" />
-            <TableColumn fx:id="tableColumnId111111" prefWidth="75.0" text="Telefone" />
+            <TableColumn fx:id="tableColumnEmail" prefWidth="75.0" text="Email" />
+            <TableColumn fx:id="tableColumnBirthDate" prefWidth="121.0" text="Data de nascimento" />
+            <TableColumn fx:id="tableColumnDistrict" prefWidth="75.0" text="Endereço" />
+            <TableColumn fx:id="tableColumnCity" prefWidth="75.0" text="Cidade" />
+            <TableColumn fx:id="tableColumnCep" prefWidth="75.0" text="CEP" />
+            <TableColumn fx:id="tableColumnRg" prefWidth="75.0" text="RG" />
+            <TableColumn fx:id="tableColumnCpf" prefWidth="75.0" text="CPF" />
+            <TableColumn fx:id="tableColumnPhone" prefWidth="75.0" text="Telefone" />
         </columns>
       </TableView>
    </children>

@@ -1,6 +1,7 @@
 package gui;
 
 import java.net.URL;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -19,12 +20,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.entities.Client;
+import model.entities.Department;
 import model.services.ClientService;
 
 public class ClientListController implements Initializable, DataChangeListener {
@@ -36,12 +39,39 @@ public class ClientListController implements Initializable, DataChangeListener {
 
 	@FXML
 	private TableColumn<Client, Integer> tableColumnId;
+	
+	@FXML
+	private TableColumn<Client, String> tableColumnName;
+
+	@FXML
+	private TableColumn<Client, String> tableColumnEmail;
+	
+	@FXML
+	private TableColumn<Client, Date> tableColumnBirthDate;
+	
+	@FXML
+	private TableColumn<Client, String> tableColumnDistrict;
+
+	@FXML
+	private TableColumn<Client, String> tableColumnCity;
+	
+	@FXML
+	private TableColumn<Client, Integer> tableColumnCep;
+	
+	@FXML
+	private TableColumn<Client, Integer> tableColumnRg;
+	
+	@FXML
+	private TableColumn<Client, Integer> tableColumnCpf;
+	
+	@FXML
+	private TableColumn<Client, Integer> tableColumnPhone;
+	
+	@FXML
+	private ComboBox<Department> comboBoxDepartment;
 
 	@FXML
 	private TableColumn<Client, Client> tableColumnREMOVE;
-
-	@FXML
-	private TableColumn<Client, String> tableColumnName;
 
 	@FXML
 	private TableColumn<Client, Client> tableColumnEDIT;
@@ -70,6 +100,15 @@ public class ClientListController implements Initializable, DataChangeListener {
 	private void initializeNodes() {
 		tableColumnId.setCellValueFactory(new PropertyValueFactory<>("id"));
 		tableColumnName.setCellValueFactory(new PropertyValueFactory<>("name"));
+		tableColumnEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+		tableColumnBirthDate.setCellValueFactory(new PropertyValueFactory<>("birthDate"));
+		Utils.formatTableColumnDate(tableColumnBirthDate, "dd/MM/yyyy");
+		tableColumnDistrict.setCellValueFactory(new PropertyValueFactory<>("district"));
+		tableColumnCity.setCellValueFactory(new PropertyValueFactory<>("city"));
+		tableColumnCep.setCellValueFactory(new PropertyValueFactory<>("cep"));
+		tableColumnRg.setCellValueFactory(new PropertyValueFactory<>("rg"));
+		tableColumnCpf.setCellValueFactory(new PropertyValueFactory<>("cpf"));
+		tableColumnPhone.setCellValueFactory(new PropertyValueFactory<>("phone"));
 
 		Stage stage = (Stage) Main.getMainScene().getWindow();
 		tableViewClient.prefHeightProperty().bind(stage.heightProperty());
