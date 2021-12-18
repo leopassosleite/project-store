@@ -16,6 +16,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
+import model.services.ClientService;
 import model.services.DepartmentService;
 import model.services.ProductService;
 
@@ -26,13 +27,19 @@ public class MainViewController implements Initializable {
 
 	@FXML
 	private MenuItem menuItemDepartment;
+	
+	@FXML
+	private MenuItem menuItemClient;
 
 	@FXML
 	private MenuItem menuItemAbout;
 
 
-	public void onMenuItemRegisterSellerAction() {
-		System.out.println("Vendedor");
+	public void onMenuItemRegisterClientAction() {
+		loadView("/gui/ClientList.fxml", (ClientListController controller) -> {
+			controller.setClientService(new ClientService());
+			controller.updateTableView();
+		});
 
 	}
 
@@ -42,7 +49,7 @@ public class MainViewController implements Initializable {
 
 	@FXML
 	public void onMenuItemProductAction() {
-		System.out.println("onMenuItemProductAction");
+
 		loadView("/gui/ProductList.fxml", (ProductListController controller) -> {
 			controller.setProductService(new ProductService());
 			controller.updateTableView();

@@ -18,6 +18,11 @@
                         <MenuItem fx:id="menuItemDepartment" mnemonicParsing="false" onAction="#onMenuItemDepartmentAction" text="Departamento" />
                   </items>
                 </Menu>
+                  <Menu mnemonicParsing="false" text="Cadastros">
+                     <items>
+                        <MenuItem fx:id="menuItemClient" mnemonicParsing="false" onAction="#onMenuItemRegisterClientAction" text="Clientes" />
+                     </items>
+                  </Menu>
                 <Menu mnemonicParsing="false" text="Ajuda">
                   <items>
                     <MenuItem fx:id="menuItemAbout" mnemonicParsing="false" onAction="#onMenuItemAboutAction" text="Sobre" />

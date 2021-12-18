@@ -1,6 +1,7 @@
 package model.entities;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Objects;
 
 public class Client implements Serializable {
@@ -9,6 +10,7 @@ public class Client implements Serializable {
 	private Integer id;
 	private String name;
 	private String email;
+	private Date birthDate;
 	private String district;
 	private String city;
 	private Integer cep;
@@ -21,11 +23,12 @@ public class Client implements Serializable {
 	public Client() {
 	}
 	
-	public Client(Integer id, String name, String email, String district, String city, Integer cep, Integer rg,
+	public Client(Integer id, String name, String email, Date birthDate, String district, String city, Integer cep, Integer rg,
 			Integer cpf, Integer phone, Department department) {
 		this.id = id;
 		this.name = name;
 		this.email = email;
+		this.birthDate = birthDate;
 		this.district = district;
 		this.city = city;
 		this.cep = cep;
@@ -57,6 +60,14 @@ public class Client implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public Date getBirthDate() {
+		return birthDate;
+	}
+
+	public void setBirthDate(Date birthDate) {
+		this.birthDate = birthDate;
 	}
 
 	public String getDistrict() {
@@ -139,4 +150,5 @@ public class Client implements Serializable {
 				+ ", cep=" + cep + ", rg=" + rg + ", cpf=" + cpf + ", phone=" + phone + ", department=" + department
 				+ "]";
 	}
+
 }
