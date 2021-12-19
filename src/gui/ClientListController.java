@@ -1,5 +1,6 @@
 package gui;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Date;
 import java.util.List;
@@ -16,18 +17,20 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.entities.Client;
-import model.entities.Department;
 import model.services.ClientService;
 
 public class ClientListController implements Initializable, DataChangeListener {
@@ -39,36 +42,33 @@ public class ClientListController implements Initializable, DataChangeListener {
 
 	@FXML
 	private TableColumn<Client, Integer> tableColumnId;
-	
+
 	@FXML
 	private TableColumn<Client, String> tableColumnName;
 
 	@FXML
 	private TableColumn<Client, String> tableColumnEmail;
-	
+
 	@FXML
 	private TableColumn<Client, Date> tableColumnBirthDate;
-	
+
 	@FXML
 	private TableColumn<Client, String> tableColumnDistrict;
 
 	@FXML
 	private TableColumn<Client, String> tableColumnCity;
-	
+
 	@FXML
 	private TableColumn<Client, Integer> tableColumnCep;
-	
+
 	@FXML
 	private TableColumn<Client, Integer> tableColumnRg;
-	
+
 	@FXML
 	private TableColumn<Client, Integer> tableColumnCpf;
-	
+
 	@FXML
 	private TableColumn<Client, Integer> tableColumnPhone;
-	
-	@FXML
-	private ComboBox<Department> comboBoxDepartment;
 
 	@FXML
 	private TableColumn<Client, Client> tableColumnREMOVE;
@@ -126,7 +126,7 @@ public class ClientListController implements Initializable, DataChangeListener {
 	}
 
 	private void CreateDialogForm(Client obj, String absoluteName, Stage parentStage) {
-		/*try {
+		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
 			Pane pane = loader.load();
 
@@ -137,7 +137,7 @@ public class ClientListController implements Initializable, DataChangeListener {
 			controller.updateFormData();
 
 			Stage dialogStage = new Stage();
-			dialogStage.setTitle("Informe os dados do departamento");
+			dialogStage.setTitle("Informe os dados do cliente");
 			dialogStage.setScene(new Scene(pane));
 			dialogStage.setResizable(false);
 			dialogStage.initOwner(parentStage);
@@ -146,7 +146,7 @@ public class ClientListController implements Initializable, DataChangeListener {
 		} catch (IOException e) {
 			e.printStackTrace();
 			Alerts.showAlert("IO Exception", "Error loading view", e.getMessage(), AlertType.ERROR);
-		}*/
+		}
 	}
 
 	@Override
@@ -167,8 +167,7 @@ public class ClientListController implements Initializable, DataChangeListener {
 					return;
 				}
 				setGraphic(button);
-				button.setOnAction(
-						event -> CreateDialogForm(obj, "/gui/ClientForm.fxml", Utils.currentStage(event)));
+				button.setOnAction(event -> CreateDialogForm(obj, "/gui/ClientForm.fxml", Utils.currentStage(event)));
 			}
 		});
 	}
@@ -193,16 +192,15 @@ public class ClientListController implements Initializable, DataChangeListener {
 
 	private void ObjectremoveEntity(Client obj) {
 		Optional<ButtonType> result = Alerts.showConfirmation("Confirmatio", "DELETAR?");
-		
-		if(result.get() == ButtonType.OK) {
+
+		if (result.get() == ButtonType.OK) {
 			if (service == null) {
 				throw new IllegalStateException("Service was null");
 			}
 			try {
 				service.remove(obj);
 				updateTableView();
-			}
-			catch (DbIntegrityException e) {
+			} catch (DbIntegrityException e) {
 				Alerts.showAlert("Error removing object", null, e.getMessage(), AlertType.ERROR);
 			}
 		}
